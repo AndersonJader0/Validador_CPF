@@ -53,6 +53,6 @@ public class JanelaCpf implements ActionListener  {
     public void actionPerformed(ActionEvent e) {
 
             String cpf1 = cpf.getText();
-            AutenticacaoCpf.verificarCpf(cpf1);
+            AutenticacaoCpf.temCpf(cpf1);
         }
     }

@@ -3,6 +3,28 @@ package autenticacaocpf;
 import javax.swing.*;
 
 public class AutenticacaoCpf {
+    
+    public static String temCpf(String cpf1){
+        
+        ConexaoSQLite conexao = new ConexaoSQLite("projetocpf.sqlite");
+        
+        conexao.query("SELECT * FROM tb_cpf");
+        
+        while(conexao.next()) {
+            int id = conexao.getInt("cod");
+            String cpf = conexao.getString("cpf");
+            
+         if(cpf1.equals(cpf.intern())){
+             JOptionPane.showMessageDialog(null,"Cpf já existe!");
+             System.exit(0);
+         }
+        }
+          
+         verificarCpf(cpf1);
+          
+        return null;
+    }
+    
     public static String verificarCpf(String cpf1){
         
          ConexaoSQLite conexao = new ConexaoSQLite("projetocpf.sqlite");
@@ -72,6 +94,7 @@ public class AutenticacaoCpf {
                     if(resultado == verificador2){
                         JOptionPane.showMessageDialog(null, "Cpf válido!", "Aviso", JOptionPane.WARNING_MESSAGE);
                     String query = "INSERT INTO tb_cpf (cpf) VALUES (";
+                    query = query + "\"" + cpf1 + "\"";query = query + ")";
       System.out.println("query: "+query);
         
         conexao.queryUpdate(query);
